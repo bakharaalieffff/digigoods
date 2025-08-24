@@ -1,0 +1,62 @@
+# Unit Test Guidelines
+
+## Principles
+
+### 1. Test only meaningful logic
+- Do not test trivial getters/setters.  
+- Focus on methods with calculations, conditions, queries, or side effects.  
+
+### 2. One test = one scenario
+- Follow the *Arrange → Act → Assert* pattern.  
+- Always make input, action, and expected output clear.  
+
+### 3. Descriptive test names
+- Format: methodName_condition_expectedResult
+- Keep test method names short and **under 100 characters per line**.  
+
+### 4. Specific imports over wildcard imports
+- Avoid using `import.*` to prevent importing unnecessary classes and potential naming conflicts.  
+- Import only the specific classes you need.  
+
+### 5. Line length guideline
+- Keep all test code lines under **100 characters**.  
+- Break long statements into multiple lines for readability.  
+
+### 6. Strive for high coverage
+- Aim for high code coverage to ensure all code paths are exercised.  
+- While 100% is the ideal, focus on **critical and complex logic** first.  
+- Remember: coverage is a **metric**, not the ultimate goal.  
+- High coverage ≠ bug-free code.  
+- Low coverage = strong indicator of testing gaps.  
+
+### 7. Test for effectiveness
+- An effective unit test validates the **intended behavior**, not the internal implementation.  
+- Tests should be **FAST**, **ISOLATED** (independent of each other), and **REPEATABLE** (same result every time).  
+- Focus on testing **business logic and expected outcomes**, not incidental details.  
+
+---
+
+## Code Example
+This example demonstrates the updated principles.  
+Note how the import is specific, the test method name is concise, and lines are under 100 chars.  
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class DiscountServiceTest {
+
+  @Test
+  void calculateDiscount_priceAbove100_returns20() {
+      // Arrange
+      int price = 150;
+      DiscountService service = new DiscountService();
+
+      // Act
+      int discount = service.calculateDiscount(price);
+
+      // Assert
+      assertEquals(20, discount);
+  }
+}
+
